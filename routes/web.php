@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('day/{date?}','GraphController@day')->name('graphs.day');
+Route::get('month/{date?}','GraphController@month')->name('graphs.month');
+Route::get('year/{date?}','GraphController@year')->name('graphs.year');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
