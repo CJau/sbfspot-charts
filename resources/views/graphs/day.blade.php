@@ -3,11 +3,13 @@
 @section('content')
   <div class="container">
     <h2>Daily Generation - {{ $date->format('F j, Y') }}</h2>
-    @if (!is_null($prev)) <a href="{{ url('day/'.$prev) }}" class="btn btn-secondary">&laquo; Previous</a> @endif
-    @if (!is_null($next)) <a href="{{ url('day/'.$next) }}" class="btn btn-secondary">&raquo; Next</a> @endif
+    @if (!is_null($prev)) <a href="{{ url('day/'.$prev) }}" class="btn btn-outline-secondary">&laquo; Previous</a> @endif
+    @if (!is_null($next)) <a href="{{ url('day/'.$next) }}" class="btn btn-outline-secondary">&raquo; Next</a> @endif
     {!! $chart->container() !!}
 
+    <h3>Raw Data by Inverter</h3>
     @foreach ($data->groupBy('Serial') as $inverter => $pdata)
+      <h4>Inverter Serial: {{ $inverter }}</h4>
       <table class="table table-striped">
         <thead>
           <tr>
