@@ -3,28 +3,36 @@
 @section('content')
   <div class="container">
     <h2>Daily Generation - {{ $date->format('F j, Y') }}</h2>
+    @if (!is_null($prev)) <a href="{{ url('day/'.$prev) }}" class="btn btn-secondary">&laquo; Previous</a> @endif
+    @if (!is_null($next)) <a href="{{ url('day/'.$next) }}" class="btn btn-secondary">&raquo; Next</a> @endif
+    {!! $chart->container() !!}
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Timestamp</th>
-          <th>Inverter</th>
-          <th>TotalYield</th>
-          <th>Power</th>
-          <th>PVOutput</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($data as $d)
+    @foreach ($data->groupBy('Serial') as $inverter => $pdata)
+      <table class="table table-striped">
+        <thead>
           <tr>
-            <td>{{ date('H:i:s',$d->TimeStamp) }}</td>
-            <td>{{ $d->Serial }}</td>
-            <td>{{ $d->TotalYield }}</td>
-            <td>{{ $d->Power }}</td>
-            <td>{{ $d->PVOutput }}</td>
+            <th>Timestamp</th>
+            <th>Inverter</th>
+            <th>TotalYield</th>
+            <th>Power</th>
           </tr>
-        @endforeach
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @foreach ($pdata as $d)
+            <tr>
+              <td>{{ $d->time }}</td>
+              <td>{{ $d->Serial }}</td>
+              <td>{{ $d->TotalYield }}</td>
+              <td>{{ $d->Power }}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    @endforeach
   </div>
 @endsection
+
+@push('footer-scripts')
+  <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
+  {!! $chart->script() !!}
+@endpush
