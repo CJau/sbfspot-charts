@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\DayDataPoint;
+use App\Inverter;
 use App\Charts\DailyChart;
 use App\Http\Requests;
 use Carbon\Carbon;
@@ -19,6 +20,7 @@ class GraphController extends Controller
       $start = $date->startOfDay()->timestamp;
       $end = $date->endOfDay()->timestamp;
       $data = DayDataPoint::whereBetween('TimeStamp',[$start,$end])->with('inverter')->get();
+      $inverters = $data->unique('Serial')->pluck('inverter');
 
       // Determine next/prev dates
       $prev = DayDataPoint::where('TimeStamp','<',$start)->orderBy('TimeStamp','DESC')->first();
@@ -26,11 +28,8 @@ class GraphController extends Controller
       $next = DayDataPoint::where('TimeStamp','>',$end)->orderBy('TimeStamp','ASC')->first();
       if (!is_null($next)) $next = date('Y-m-d',$next->TimeStamp);
 
-      // Create daily chart with data
-      $chart = new DailyChart($data);
-
       // Display
-      return view('graphs.day', compact('date','chart','data','next','prev'));
+      return view('graphs.day', compact('date','next','prev','data','inverters'));
     }
 
     public function month($date = null) {
