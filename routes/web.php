@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('graphs.day'));
 });
 
 Route::get('day/{date?}','GraphController@day')->name('graphs.day');
