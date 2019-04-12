@@ -12,30 +12,40 @@
     @else
       <div id="chart" class="mb-3"></div>
 
-      <h3>Raw Data by Inverter</h3>
-      @foreach ($data->groupBy('Serial') as $inverter => $pdata)
-        <h4>Inverter Serial: {{ $inverter }}</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Timestamp</th>
-              <th>Inverter</th>
-              <th>TotalYield</th>
-              <th>Power</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($pdata as $d)
-              <tr>
-                <td>{{ $d->time }}</td>
-                <td>{{ $d->Serial }}</td>
-                <td>{{ $d->TotalYield }}</td>
-                <td>{{ $d->Power }}</td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
-      @endforeach
+      <p>
+        <h3 class="d-inline mr-3 align-middle">Raw Data By Inverter</h3>      
+        <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#rawData" aria-expanded="false" aria-controls="rawData">
+          Show/Hide
+        </button>
+      </p>
+
+      <div class="collapse" id="rawData">
+        <div class="card card-body">
+          @foreach ($data->groupBy('Serial') as $inverter => $pdata)
+            <h4>Inverter Serial: {{ $inverter }}</h4>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Inverter</th>
+                  <th>TotalYield</th>
+                  <th>Power</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($pdata as $d)
+                  <tr>
+                    <td>{{ $d->time }}</td>
+                    <td>{{ $d->Serial }}</td>
+                    <td>{{ $d->TotalYield }}</td>
+                    <td>{{ $d->Power }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          @endforeach
+        </div>
+      </div>
     @endif
   </div>
 @endsection
