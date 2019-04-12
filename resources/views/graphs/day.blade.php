@@ -3,34 +3,40 @@
 @section('content')
   <div class="container">
     <h2>Daily Generation - {{ $date->format('F j, Y') }}</h2>
-    @if (!is_null($prev)) <a href="{{ url('day/'.$prev) }}" class="btn btn-outline-secondary">&laquo; Previous</a> @endif
-    @if (!is_null($next)) <a href="{{ url('day/'.$next) }}" class="btn btn-outline-secondary">&raquo; Next</a> @endif
-    <div id="chart"></div>
+    <div class="mt-3">
+      @if (!is_null($prev)) <a href="{{ url('day/'.$prev) }}" class="btn btn-outline-secondary">&laquo; Previous</a> @endif
+      @if (!is_null($next)) <a href="{{ url('day/'.$next) }}" class="btn btn-outline-secondary">&raquo; Next</a> @endif
+    </div>
+    @if ($data->isEmpty())
+      <p class="mt-3">No data exists for the chosen date, please use the navigation button(s) above to select a nearby day with data.</p>
+    @else
+      <div id="chart" class="mb-3"></div>
 
-    <h3>Raw Data by Inverter</h3>
-    @foreach ($data->groupBy('Serial') as $inverter => $pdata)
-      <h4>Inverter Serial: {{ $inverter }}</h4>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Timestamp</th>
-            <th>Inverter</th>
-            <th>TotalYield</th>
-            <th>Power</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($pdata as $d)
+      <h3>Raw Data by Inverter</h3>
+      @foreach ($data->groupBy('Serial') as $inverter => $pdata)
+        <h4>Inverter Serial: {{ $inverter }}</h4>
+        <table class="table table-striped">
+          <thead>
             <tr>
-              <td>{{ $d->time }}</td>
-              <td>{{ $d->Serial }}</td>
-              <td>{{ $d->TotalYield }}</td>
-              <td>{{ $d->Power }}</td>
+              <th>Timestamp</th>
+              <th>Inverter</th>
+              <th>TotalYield</th>
+              <th>Power</th>
             </tr>
-          @endforeach
-        </tbody>
-      </table>
-    @endforeach
+          </thead>
+          <tbody>
+            @foreach ($pdata as $d)
+              <tr>
+                <td>{{ $d->time }}</td>
+                <td>{{ $d->Serial }}</td>
+                <td>{{ $d->TotalYield }}</td>
+                <td>{{ $d->Power }}</td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      @endforeach
+    @endif
   </div>
 @endsection
 
@@ -52,8 +58,9 @@
           [
             'Time', 
             @foreach ($inverters as $i)
-              '{{ 'Inverter '.$i->Name }}',
+              '{{ $i->Name }} (W)',
             @endforeach
+            'Total Generated (kWh)'
           ],
 
           @foreach ($data->groupBy('TimeStamp') as $ts => $datapoints)
@@ -62,20 +69,46 @@
               @foreach ($inverters as $i)
                 {{ optional($datapoints->where('Serial',$i->Serial)->first())->Power }},
               @endforeach
+              @if ($datapoints->count() == $inverters->count())
+                {{ ($datapoints->sum('TotalYield') - $startpower->sum('TotalYield')) / 1000 }},
+              @else
+                null,
+              @endif
             ],
           @endforeach
         ]);
 
         var options = {
           title: 'Daily generation',
+          backgroundColor: { fill:'transparent' },
           curveType: 'function',
-          legend: { position: 'right' },
-          vAxis: { 
-            title: "kWh", 
-            viewWindowMode:'explicit',
-            viewWindow:{
-              min:0
-            }
+          legend: { position: 'bottom' },
+          height: 450,
+          chartArea: { width: '80%', height: '65%' },
+          vAxes: {
+            0: { 
+              title: "Wh", 
+              viewWindowMode:'explicit',
+              viewWindow:{
+                min:0
+              }
+            },
+            1: { 
+              title: "kWh Total", 
+              viewWindowMode:'explicit',
+              viewWindow:{
+                min:0
+              },
+              gridlines: {
+                  color: 'transparent'
+              }
+            },
+          },
+          series: {
+            @foreach ($inverters as $i)
+              {{ $loop->index }}:{targetAxisIndex: 0},
+            @endforeach
+            {{ $inverters->count()}}: {targetAxisIndex: 1}
           }
         };
 
