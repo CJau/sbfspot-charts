@@ -59,9 +59,9 @@
     google.charts.setOnLoadCallback(drawChart);
 
     // Callback that creates and populates a data table,
-    // instantiates the pie chart, passes in the data and
-    // draws it.
+    // instantiates chart, passes in the data and draws it.
     function drawChart() {
+      // One col for date on X axis, each inverter as stack, and average as line on Y axis
         var data = google.visualization.arrayToDataTable([
           [
             'Day', 
@@ -71,6 +71,7 @@
             'Average'
           ],
 
+          // Add values for each day date, inverter serial, average (* inverters to get average generation by day rather than by inverter)
           @foreach ($data->groupBy('DayDate') as $day => $daydata)
             [
               '{{ $day }}',
@@ -82,6 +83,7 @@
           @endforeach
         ]);
 
+        // Formatting for chart
         var options = {
           title: 'Monthly generation',
           backgroundColor: { fill:'transparent' },
@@ -102,12 +104,12 @@
           series: { {{ $inverters->count() }}: {type: 'line'} }
         };
 
+        // Draw chart
         var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
         chart.draw(data, options);
 
-        // Listen for the 'select' event, and call my function selectHandler() when
+        // Listen for the 'select' event, and call selectHandler - redirect to day selected.
         google.visualization.events.addListener(chart, 'select', selectHandler);
-
         function selectHandler() {
           var selectedItem = chart.getSelection()[0];
           if (selectedItem) {

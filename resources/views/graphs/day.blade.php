@@ -61,9 +61,9 @@
     google.charts.setOnLoadCallback(drawChart);
 
     // Callback that creates and populates a data table,
-    // instantiates the pie chart, passes in the data and
-    // draws it.
+    // instantiates chart, passes in the data and draws it.
     function drawChart() {
+        // One col for time of day (X axis), instantaneous generation of each inverter on left Y axis, total generation of all on right Y axis
         var data = google.visualization.arrayToDataTable([
           [
             'Time', 
@@ -73,6 +73,7 @@
             'Total Generated (kWh)'
           ],
 
+          // Add rows for each of the columns defined above.
           @foreach ($data->groupBy('TimeStamp') as $ts => $datapoints)
             [
               '{{ date('G:i',$ts) }}',
@@ -88,6 +89,7 @@
           @endforeach
         ]);
 
+        // Chart formatting
         var options = {
           title: 'Daily generation',
           backgroundColor: { fill:'transparent' },
@@ -122,8 +124,8 @@
           }
         };
 
+        // Draw chart
         var chart = new google.visualization.LineChart(document.getElementById('chart'));
-
         chart.draw(data, options);
       }
   </script>
