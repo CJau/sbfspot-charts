@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
+  <div class="container mx-auto bg-grey-lightest p-4 mb-4">
     <h2>Daily Generation - {{ $date->format('F j, Y') }}</h2>
     <div class="mt-3">
-      @if (!is_null($prev)) <a href="{{ url('day/'.$prev) }}" class="btn btn-outline-secondary">&laquo; Previous</a> @endif
+      @if (!is_null($prev)) <a href="{{ url('day/'.$prev) }}" class="px-3 py-2 rounded-lg border no-underline">&laquo; Previous</a> @endif
       @if (!is_null($next)) <a href="{{ url('day/'.$next) }}" class="btn btn-outline-secondary">&raquo; Next</a> @endif
     </div>
     @if ($data->isEmpty())
@@ -23,7 +23,7 @@
         <div class="card card-body">
           @foreach ($data->groupBy('Serial') as $inverter => $pdata)
             <h4>Inverter Serial: {{ $inverter }}</h4>
-            <table class="table table-striped">
+            <table class="w-full">
               <thead>
                 <tr>
                   <th>Timestamp</th>

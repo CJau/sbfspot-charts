@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
+  <div class="container mx-auto">
     <h2>Year Generation - {{ $date->format('Y') }}</h2>
     <div class="mt-3">
       @if (!is_null($prev)) <a href="{{ url('year/'.$prev) }}" class="btn btn-outline-secondary">&laquo; Previous</a> @endif

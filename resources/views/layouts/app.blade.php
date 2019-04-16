@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,47 +9,33 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="bg-grey-lighter h-screen antialiased">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                            <li class="nav-item"><a class="nav-link" href="{{ route('graphs.day') }}">{{ __('Daily') }}</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('graphs.month') }}">{{ __('Monthly') }}</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('graphs.year') }}">{{ __('Yearly') }}</a></li>
-                    </ul>
+        <nav class="bg-grey-light mb-4 py-6">
+            <div class="container mx-auto px-6 md:px-0">
+                <div class="flex items-center justify-center">
+                    <div class="mr-6">
+                        <a href="{{ url('/') }}" class="text-xl font-semibold text-grey-darkest no-underline">
+                            {{ config('app.name', 'Laravel') }}
+                        </a>
+                    </div>
+                    <div class="flex-1 text-right">
+                        <a class="no-underline text-grey-darkest text-sm font-semibold hover:text-grey-dark p-3" href="{{ route('graphs.day') }}">{{ __('Daily') }}</a>
+                        <a class="no-underline text-grey-darkest text-sm font-semibold hover:text-grey-dark p-3" href="{{ route('graphs.month') }}">{{ __('Monthly') }}</a>
+                        <a class="no-underline text-grey-darkest text-sm font-semibold hover:text-grey-dark p-3" href="{{ route('graphs.year') }}">{{ __('Yearly') }}</a>
+                    </div>
                 </div>
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        @yield('content')
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js') }}"></script>
     @stack('footer-scripts')
 </body>
 </html>
