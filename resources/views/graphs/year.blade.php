@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container mx-auto px-6">
+  <div class="container mx-auto px-6 md:px-0">
     <div class="my-4">
       <h2 class="md:inline-block align-middle">Year Generation - {{ $date->format('Y') }}</h2>
       <div class="md:inline-block align-middle">
