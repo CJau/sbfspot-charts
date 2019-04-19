@@ -1,49 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container mx-auto bg-grey-lightest p-4 mb-4">
-    <h2>Daily Generation - {{ $date->format('F j, Y') }}</h2>
-    <div class="mt-3">
-      @if (!is_null($prev)) <a href="{{ url('day/'.$prev) }}" class="px-3 py-2 rounded-lg border no-underline">&laquo; Previous</a> @endif
-      @if (!is_null($next)) <a href="{{ url('day/'.$next) }}" class="btn btn-outline-secondary">&raquo; Next</a> @endif
+  <div class="container mx-auto">
+    <div class="my-4">
+      <h2 class="md:inline-block align-middle">Daily Generation - {{ $date->format('F j, Y') }}</h2>
+      <div class="md:inline-block align-middle">
+        @if (!is_null($prev)) <a href="{{ url('day/'.$prev) }}" class="btn-outline">&laquo; Previous</a> @endif
+        @if (!is_null($next)) <a href="{{ url('day/'.$next) }}" class="btn-outline">&raquo; Next</a> @endif
+      </div>
     </div>
     @if ($data->isEmpty())
-      <p class="mt-3">No data exists for the chosen date, please use the navigation button(s) above to select a nearby day with data.</p>
+      <p class="mt-5 bg-grey-lightest p-4 mb-4 shadow">No data exists for the chosen date, please use the navigation button(s) above to select a nearby day with data.</p>
     @else
-      <div id="chart" class="mb-3"></div>
+      <div id="chart" class="bg-grey-lightest p-4 mb-4 shadow"></div>
 
-      <p>
-        <h3 class="d-inline mr-3 align-middle">Raw Data By Inverter</h3>      
-        <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#rawData" aria-expanded="false" aria-controls="rawData">
+      <div class="my-4">
+        <h3 class="md:inline-block align-middle">Raw Data By Inverter</h3>      
+        <button class="btn-outline md:inline-block align-middle" type="button" data-toggle="collapse" data-target="#rawData" aria-expanded="false" aria-controls="rawData">
           Show/Hide
         </button>
-      </p>
-
-      <div class="collapse" id="rawData">
-        <div class="card card-body">
-          @foreach ($data->groupBy('Serial') as $inverter => $pdata)
-            <h4>Inverter Serial: {{ $inverter }}</h4>
-            <table class="w-full">
-              <thead>
-                <tr>
-                  <th>Timestamp</th>
-                  <th>Inverter</th>
-                  <th>TotalYield</th>
-                  <th>Power</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($pdata as $d)
+      </div>
+      <div class="bg-grey-lightest px-4 pt-4 mb-4 shadow">
+        <div class="collapse" id="rawData">
+          <div class="card card-body">
+            @foreach ($data->groupBy('Serial') as $inverter => $pdata)
+              <h4>Inverter Serial: {{ $inverter }}</h4>
+              <table class="striped">
+                <thead>
                   <tr>
-                    <td>{{ $d->time }}</td>
-                    <td>{{ $d->Serial }}</td>
-                    <td>{{ $d->TotalYield }}</td>
-                    <td>{{ $d->Power }}</td>
+                    <th>Timestamp</th>
+                    <th>Inverter</th>
+                    <th>TotalYield</th>
+                    <th>Power</th>
                   </tr>
-                @endforeach
-              </tbody>
-            </table>
-          @endforeach
+                </thead>
+                <tbody>
+                  @foreach ($pdata as $d)
+                    <tr>
+                      <td>{{ $d->time }}</td>
+                      <td>{{ $d->Serial }}</td>
+                      <td>{{ $d->TotalYield }}</td>
+                      <td>{{ $d->Power }}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            @endforeach
+          </div>
         </div>
       </div>
     @endif

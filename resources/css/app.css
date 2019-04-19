@@ -31,6 +31,37 @@
  * @import "components/buttons";
  * @import "components/forms";
  */
+ /* Blue button and outline buttonstyle */
+.btn, .btn-outline:hover {
+  @apply px-3 py-2 rounded-lg border no-underline text-white bg-blue;
+}
+
+.btn-outline, .btn:hover {
+  @apply px-3 py-2 rounded-lg border border-blue no-underline text-blue bg-white;
+}
+
+/* Striped full width table component */
+.striped {
+  @apply w-full my-4;
+}
+.striped tr:nth-child(odd) {
+  @apply bg-grey-lighter;
+}
+.striped tr:nth-child(even) {
+  @apply bg-grey-lightest;
+}
+.striped tr:hover {
+  @apply bg-blue-lightest;
+}
+.striped td, .striped th {
+  @apply px-5 py-2;
+}
+.striped th {
+  @apply font-bold text-left bg-blue-lighter;
+}
+.striped td {
+  @apply border-grey-light;
+}
 
 /**
  * This injects all of Tailwind's utility classes, generated based on your
