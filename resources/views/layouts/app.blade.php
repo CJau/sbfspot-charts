@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ url(mix('css/app.css')) }}" rel="stylesheet">
+    <link href="{{ url('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-grey-lighter h-screen antialiased">
     <div id="app">
@@ -35,7 +35,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ url(mix('js/app.js')) }}"></script>
+    <script src="{{ url('js/app.js') }}"></script>
     @stack('footer-scripts')
 </body>
 </html>
