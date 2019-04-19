@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container mx-auto">
+  <div class="container mx-auto px-6 ">
     <div class="my-4">
       <h2 class="md:inline-block align-middle">Daily Generation - {{ $date->format('F j, Y') }}</h2>
       <div class="md:inline-block align-middle">
