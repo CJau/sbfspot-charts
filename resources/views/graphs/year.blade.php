@@ -2,48 +2,41 @@
 
 @section('content')
   <div class="container mx-auto">
-    <h2>Year Generation - {{ $date->format('Y') }}</h2>
-    <div class="mt-3">
-      @if (!is_null($prev)) <a href="{{ url('year/'.$prev) }}" class="btn btn-outline-secondary">&laquo; Previous</a> @endif
-      @if (!is_null($next)) <a href="{{ url('year/'.$next) }}" class="btn btn-outline-secondary">&raquo; Next</a> @endif
+    <div class="my-4">
+      <h2 class="md:inline-block align-middle">Year Generation - {{ $date->format('Y') }}</h2>
+      <div class="md:inline-block align-middle">
+        @if (!is_null($prev)) <a href="{{ url('year/'.$prev) }}" class="btn-outline">&laquo; Previous</a> @endif
+        @if (!is_null($next)) <a href="{{ url('year/'.$next) }}" class="btn-outline">&raquo; Next</a> @endif
+      </div>
     </div>
     @if ($data->isEmpty())
-      <p class="mt-3">No data exists for the chosen year, please use the navigation button(s) above to select a nearby year with data.</p>
+      <p class="mt-5 bg-grey-lightest p-4 mb-4 shadow">No data exists for the chosen year, please use the navigation button(s) above to select a nearby year with data.</p>
     @else
-      <div id="chart" class="mb-3"></div>
+      <div id="chart" class="bg-grey-lightest p-4 mb-4 shadow"></div>
 
-      <p>
-        <h3 class="d-inline mr-3 align-middle">Raw Data By Inverter</h3>      
-        <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#rawData" aria-expanded="false" aria-controls="rawData">
-          Show/Hide
-        </button>
-      </p>
-
-      <div class="collapse" id="rawData">
-        <div class="card card-body">
-          @foreach ($data->groupBy('Serial') as $inverter => $pdata)
-            <h4>Inverter Serial: {{ $inverter }}</h4>
-            <table class="table table-striped">
-              <thead>
+      <collapsible-component :button-wrapper-class="'my-4'" :title="'Raw Data By Inverter'" :collapsible-wrapper-class="'bg-grey-lightest px-4 pt-4 mb-4 shadow'">
+        @foreach ($data->groupBy('Serial') as $inverter => $pdata)
+          <h4>Inverter Serial: {{ $inverter }}</h4>
+          <table class="striped">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Inverter</th>
+                <th>MonthlyYield (kWh)</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($pdata as $d)
                 <tr>
-                  <th>Month</th>
-                  <th>Inverter</th>
-                  <th>MonthlyYield (kWh)</th>
+                  <td>{{ $d->MonthDate }}</td>
+                  <td>{{ $d->Serial }}</td>
+                  <td>{{ $d->Generation }}</td>
                 </tr>
-              </thead>
-              <tbody>
-                @foreach ($pdata as $d)
-                  <tr>
-                    <td>{{ $d->MonthDate }}</td>
-                    <td>{{ $d->Serial }}</td>
-                    <td>{{ $d->Generation }}</td>
-                  </tr>
-                @endforeach
-              </tbody>
-            </table>
-          @endforeach
-        </div>
-      </div>
+              @endforeach
+            </tbody>
+          </table>
+        @endforeach
+      </collapsible-component>
     @endif
   </div>
 @endsection

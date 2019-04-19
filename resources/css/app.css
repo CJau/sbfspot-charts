@@ -33,11 +33,11 @@
  */
  /* Blue button and outline buttonstyle */
 .btn, .btn-outline:hover {
-  @apply px-3 py-2 rounded-lg border no-underline text-white bg-blue;
+  @apply px-3 py-2 rounded-lg border no-underline text-white bg-blue inline-block;
 }
 
 .btn-outline, .btn:hover {
-  @apply px-3 py-2 rounded-lg border border-blue no-underline text-blue bg-white;
+  @apply px-3 py-2 rounded-lg border border-blue no-underline text-blue bg-white inline-block;
 }
 
 /* Striped full width table component */

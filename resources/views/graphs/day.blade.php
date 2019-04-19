@@ -14,41 +14,31 @@
     @else
       <div id="chart" class="bg-grey-lightest p-4 mb-4 shadow"></div>
 
-      <div class="my-4">
-        <h3 class="md:inline-block align-middle">Raw Data By Inverter</h3>      
-        <button class="btn-outline md:inline-block align-middle" type="button" data-toggle="collapse" data-target="#rawData" aria-expanded="false" aria-controls="rawData">
-          Show/Hide
-        </button>
-      </div>
-      <div class="bg-grey-lightest px-4 pt-4 mb-4 shadow">
-        <div class="collapse" id="rawData">
-          <div class="card card-body">
-            @foreach ($data->groupBy('Serial') as $inverter => $pdata)
-              <h4>Inverter Serial: {{ $inverter }}</h4>
-              <table class="striped">
-                <thead>
-                  <tr>
-                    <th>Timestamp</th>
-                    <th>Inverter</th>
-                    <th>TotalYield</th>
-                    <th>Power</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($pdata as $d)
-                    <tr>
-                      <td>{{ $d->time }}</td>
-                      <td>{{ $d->Serial }}</td>
-                      <td>{{ $d->TotalYield }}</td>
-                      <td>{{ $d->Power }}</td>
-                    </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            @endforeach
-          </div>
-        </div>
-      </div>
+      <collapsible-component :button-wrapper-class="'my-4'" :title="'Raw Data By Inverter'" :collapsible-wrapper-class="'bg-grey-lightest px-4 pt-4 mb-4 shadow'">
+        @foreach ($data->groupBy('Serial') as $inverter => $pdata)
+          <h4>Inverter Serial: {{ $inverter }}</h4>
+          <table class="striped">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Inverter</th>
+                <th>TotalYield</th>
+                <th>Power</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($pdata as $d)
+                <tr>
+                  <td>{{ $d->time }}</td>
+                  <td>{{ $d->Serial }}</td>
+                  <td>{{ $d->TotalYield }}</td>
+                  <td>{{ $d->Power }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        @endforeach
+      </collapsible-component>
     @endif
   </div>
 @endsection
