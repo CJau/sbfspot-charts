@@ -6,7 +6,7 @@
         Show/Hide
       </button>
     </div>
-    <div :class="{collapsibleWrapperClass, hidden: !visible}">
+    <div :class="[visible ? '' : 'hidden', collapsibleWrapperClass]">
       <slot></slot>
     </div>
   </div>
