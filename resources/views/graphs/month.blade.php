@@ -4,7 +4,7 @@
   <div class="container mx-auto px-6 md:px-0">
     <div class="my-4">
       <h2 class="md:inline-block align-middle">Monthly Generation - {{ $date->format('F, Y') }}</h2>
-      <div class="md:inline-block align-middle">
+      <div class="mt-3 md:mt-0 md:inline-block align-middle">
         @if (!is_null($prev)) <a href="{{ url('month/'.$prev) }}" class="btn btn-outline-secondary">&laquo; Previous</a> @endif
         @if (!is_null($next)) <a href="{{ url('month/'.$next) }}" class="btn btn-outline-secondary">&raquo; Next</a> @endif
       </div>
@@ -21,7 +21,7 @@
             <thead>
               <tr>
                 <th>Day</th>
-                <th>Inverter</th>
+                <th class="hidden md:table-cell">Inverter</th>
                 <th>DailyYield (kWh)</th>
               </tr>
             </thead>
@@ -29,7 +29,7 @@
               @foreach ($pdata as $d)
                 <tr>
                   <td>{{ $d->DayDate }}</td>
-                  <td>{{ $d->Serial }}</td>
+                  <td class="hidden md:table-cell">{{ $d->Serial }}</td>
                   <td>{{ $d->Generation }}</td>
                 </tr>
               @endforeach

@@ -15,20 +15,24 @@
 <body class="bg-grey-lighter h-screen antialiased">
     <div id="app">
         <nav class="bg-grey-light mb-4 py-6">
+
             <div class="container mx-auto px-6 md:px-0">
-                <div class="flex items-center justify-center">
-                    <div class="mr-6">
+                <div class="flex items-center justify-space">
+                    <div class="mr-6 items-start">
                         <a href="{{ url('/') }}" class="text-xl font-semibold text-grey-darkest no-underline">
                             {{ config('app.name', 'Laravel') }}
                         </a>
                     </div>
-                    <div class="flex-1 text-right">
-                        <a class="no-underline text-grey-darkest text-sm font-semibold hover:text-grey-dark p-3" href="{{ route('graphs.day') }}">{{ __('Daily') }}</a>
-                        <a class="no-underline text-grey-darkest text-sm font-semibold hover:text-grey-dark p-3" href="{{ route('graphs.month') }}">{{ __('Monthly') }}</a>
-                        <a class="no-underline text-grey-darkest text-sm font-semibold hover:text-grey-dark p-3" href="{{ route('graphs.year') }}">{{ __('Yearly') }}</a>
+                    <div class="flex-1 text-right items-center">
+                        <responsive-nav-component :items="{{ json_encode([
+                          ['url' => route('graphs.day'), 'label' => __('Daily') ],
+                          ['url' => route('graphs.month'), 'label' => __('Monthly') ],
+                          ['url' => route('graphs.year'), 'label' => __('Yearly') ],
+                        ]) }}"></responsive-nav-component>
                     </div>
                 </div>
             </div>
+
         </nav>
 
         @yield('content')

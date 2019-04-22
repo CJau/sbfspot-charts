@@ -1,8 +1,8 @@
 <template>
   <div>
     <div :class="buttonWrapperClass">
-      <h3 class="md:inline-block align-middle">{{ title }}</h3>      
-      <button class="btn-outline md:inline-block align-middle" type="button" @click.prevent="toggleCollapse">
+      <h3 class="inline-block align-middle">{{ title }}</h3>      
+      <button class="btn-outline inline-block align-middle" type="button" @click.prevent="toggleCollapse">
         Show/Hide
       </button>
     </div>
