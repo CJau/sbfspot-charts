@@ -22,7 +22,7 @@
               <tr>
                 <th>Month</th>
                 <th class="hidden md:table-cell">Inverter</th>
-                <th>MonthlyYield (kWh)</th>
+                <th>Yield (kWh)</th>
               </tr>
             </thead>
             <tbody>

@@ -20,9 +20,9 @@
           <table class="striped">
             <thead>
               <tr>
-                <th>Timestamp</th>
+                <th>Time</th>
                 <th class="hidden md:table-cell">Inverter</th>
-                <th>TotalYield</th>
+                <th>Tot. Yield</th>
                 <th>Power</th>
               </tr>
             </thead>

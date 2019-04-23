@@ -22,7 +22,7 @@
               <tr>
                 <th>Day</th>
                 <th class="hidden md:table-cell">Inverter</th>
-                <th>DailyYield (kWh)</th>
+                <th>Yield (kWh)</th>
               </tr>
             </thead>
             <tbody>
