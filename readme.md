@@ -1,6 +1,6 @@
 # SBFSpot Charts
 
-Solar Tracking is a web application built using the [Laravel 5.8 framework](https://www.laravel.com).  It uses [SBFSpot](https://sbfspot.codeplex.com/) for reading data from the SMA inverter
+SBFSpot Charts is an independent web application built using the [Laravel 5.8 framework](https://www.laravel.com).  It uses [SBFSpot](https://sbfspot.codeplex.com/) for reading data from the SMA inverter
 over bluetooth on a [Raspberry Pi](https://www.raspberrypi.org), and the [Google Charts API](https://developers.google.com/chart/) for visualisations. 
 
 ## Features
