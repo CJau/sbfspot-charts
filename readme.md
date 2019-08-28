@@ -1,6 +1,6 @@
 # SBFSpot Charts
 
-SBFSpot Charts is an independent web application built using the [Laravel 5.8 framework](https://www.laravel.com).  It uses [SBFSpot](https://sbfspot.codeplex.com/) for reading data from the SMA inverter
+SBFSpot Charts is an independent web application built using the [Laravel 5.8 framework](https://www.laravel.com).  It uses [SBFSpot](https://github.com/SBFspot/SBFspot) for reading data from the SMA inverter
 over bluetooth on a [Raspberry Pi](https://www.raspberrypi.org), and the [Google Charts API](https://developers.google.com/chart/) for visualisations. 
 
 ## Features
@@ -19,7 +19,7 @@ Being based on Laravel, this has the same requirements as that. See their requir
 
 ## Installation
 
-1. Establish a working copy of [SBFSpot](https://sbfspot.codeplex.com/documentation)
+1. Establish a working copy of [SBFSpot](https://github.com/SBFspot/sbfspot-config)
 2. Set up a database and cron job to store the data from SBFSpot.
   * This has been tested using a MySQL database setup, but should theoretically also work with SQLite
 3. Clone the repository to your server with `git clone https://CJ_au@bitbucket.org/CJ_au/solar-tracking.git`.
@@ -29,7 +29,7 @@ Being based on Laravel, this has the same requirements as that. See their requir
 7. Open the site in a browser.
 
 ## Credits
-* [SBFSpot](https://sbfspot.codeplex.com/) for reading data from the SMA inverter
+* [SBFSpot](https://github.com/SBFspot/SBFspot) for reading data from the SMA inverter
 * [Laravel 5.8 framework](https://www.laravel.com) for backend/API
 * [TailwindCSS](https://tailwindcss.com) for majority of CSS
 * [VueJS](https://vuejs.org/) for interactive components
