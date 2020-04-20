@@ -8,9 +8,10 @@ class Inverter extends Model
 {
     protected $primaryKey = 'Serial';
     protected $table = 'Inverters';
+    
     public $incrementing = false;
 
     public function data_points() {
-        return $this->hasMany('App\DayDataPoint','Serial','Serial');
+        return $this->hasMany(DayDataPoint::class, 'Serial', 'Serial');
     }
 }
