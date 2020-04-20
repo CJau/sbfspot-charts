@@ -15,11 +15,13 @@ class DayDataPoint extends Model
         'time',
     ];
 
-    public function inverter() {
+    public function inverter()
+    {
         return $this->belongsTo(Inverter::class, 'Serial');
     }
 
-    public function getTimeAttribute() {
-      return date('H:i', $this->TimeStamp);
+    public function getTimeAttribute()
+    {
+        return date('H:i', $this->TimeStamp);
     }
 }
