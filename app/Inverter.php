@@ -9,6 +9,7 @@ class Inverter extends Model
     protected $primaryKey = 'Serial';
     protected $table = 'Inverters';
 
+    public $timestamps = false;
     public $incrementing = false;
 
     public function dataPoints()

@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Inverter::class, function (Faker $faker) {
     return [
-        'Serial' => $faker->unique()->word,
+        'Serial' => $faker->unique()->numberBetween(1000000, 2000000),
         'Name' => $faker->name,
         'Type' => 'SB 2000',
         'SW_Version' => '12.34.567',
