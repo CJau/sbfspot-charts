@@ -33,7 +33,7 @@ class GraphControllerTest extends TestCase
             ->assertOk()
             ->assertViewIs('graphs.month')
             ->assertViewHas([
-                'date' => today()->endOfDay(),
+                'date' => today()->endOfMonth(),
             ]);
     }
 
@@ -44,7 +44,7 @@ class GraphControllerTest extends TestCase
             ->assertOk()
             ->assertViewIs('graphs.year')
             ->assertViewHas([
-                'date' => today()->endOfDay(),
+                'date' => today()->endOfYear(),
             ]);
     }
 }
