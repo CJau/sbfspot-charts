@@ -10,7 +10,8 @@ class GraphControllerTest extends TestCase
     use RefreshDatabase;
     
     /** @test */
-    public function home_redeirects_to_day() {
+    public function home_redirects_to_day()
+    {
         $this->get('/')
             ->assertRedirect(route('graphs.day'));
     }
