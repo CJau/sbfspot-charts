@@ -6,11 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class DayDataPoint extends Model
 {
-    protected $primaryKey = null;
     protected $table = 'DayData';
+    // protected $primaryKey = [
+    //     'TimeStamp',
+    //     'Serial',
+    // ];
+    protected $primaryKey = null;
+    public $incrementing = false;
 
     public $timestamps = false;
-    
+
     public $appends = [
         'time',
     ];
@@ -23,5 +28,15 @@ class DayDataPoint extends Model
     public function getTimeAttribute()
     {
         return date('H:i', $this->TimeStamp);
+    }
+
+    public function update(array $attributes = [], array $options = []) {
+        // So we don't accidentally call eloquent update when eloquent doesn't 
+        // support composite primary keys
+    }
+
+    public function save(array $options = []) {
+        // So we don't accidentally call eloquent update when eloquent doesn't 
+        // support composite primary keys
     }
 }
