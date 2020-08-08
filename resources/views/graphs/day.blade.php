@@ -24,6 +24,9 @@
                 <th class="hidden md:table-cell">Inverter</th>
                 <th>Tot. Yield</th>
                 <th>Power</th>
+                @auth
+                    <th>Actions</th>
+                @endauth
               </tr>
             </thead>
             <tbody>
@@ -33,6 +36,19 @@
                   <td class="hidden md:table-cell">{{ $d->Serial }}</td>
                   <td>{{ $d->TotalYield }}</td>
                   <td>{{ $d->Power }}</td>
+                  @auth
+                    <td>
+                        <div class="flex items-center">
+                            <a href="{{ route('day_data_points.edit', [$d->Serial, $d->TimeStamp]) }}">E</a>
+                            <form method="POST" action="{{ route('day_data_points.delete', [$d->Serial, $d->TimeStamp]) }}" class="inline" onSubmit="return confirm('Are you sure?');">
+                                @csrf
+                                @method('DELETE')
+                                
+                                <a href="{{ route('day_data_points.edit', [$d->Serial, $d->TimeStamp]) }}" onClick="this.form.submit()">X</a>
+                            </form>
+                        </div>
+                    </td>
+                  @endautuh
                 </tr>
               @endforeach
             </tbody>
