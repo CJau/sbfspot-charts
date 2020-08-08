@@ -20,6 +20,11 @@ class DayDataPoint extends Model
         'time',
     ];
 
+    protected $dates = [
+        'TimeStamp',
+    ];
+    protected $dateFormat = 'U';
+
     public function inverter()
     {
         return $this->belongsTo(Inverter::class, 'Serial');
@@ -27,7 +32,7 @@ class DayDataPoint extends Model
 
     public function getTimeAttribute()
     {
-        return date('H:i', $this->TimeStamp);
+        return $this->TimeStamp->format('H:i');
     }
 
     public function update(array $attributes = [], array $options = []) {

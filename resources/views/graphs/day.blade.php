@@ -67,9 +67,9 @@
           ],
 
           // Add rows for each of the columns defined above.
-          @foreach ($data->groupBy('TimeStamp') as $ts => $datapoints)
+          @foreach ($data->groupBy('time') as $time => $datapoints)
             [
-              '{{ date('G:i',$ts) }}',
+              '{{ $time }}',
               @foreach ($inverters as $i)
                 {{ optional($datapoints->where('Serial',$i->Serial)->first())->Power }},
               @endforeach
