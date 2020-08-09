@@ -19759,15 +19759,14 @@ var render = function() {
       "button",
       {
         staticClass:
-          "md:hidden items-center px-3 py-2 border rounded text-blue-lighter border-blue-light hover:text-white hover:border-white",
+          "items-center px-3 py-2 border rounded md:hidden text-blue-lighter border-blue-light hover:text-white hover:border-white",
         on: { click: _vm.toggleMenu }
       },
       [
         _c(
           "svg",
           {
-            staticClass:
-              "fill-current text-blue-light hover:text-white h-3 w-3",
+            staticClass: "w-3 h-3 text-blue-400 fill-current hover:text-white",
             attrs: { viewBox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg" }
           },
           [
@@ -19784,7 +19783,7 @@ var render = function() {
       "div",
       {
         staticClass:
-          "md:block bg-grey-light absolute md:static text-right pin-r md:pin-none mt-6 md:mt-0 py-1 shadow md:shadow-none",
+          "absolute py-1 mt-6 text-right bg-gray-400 shadow md:block md:static pin-r md:pin-none md:mt-0 md:shadow-none",
         class: { hidden: !_vm.visible }
       },
       _vm._l(_vm.items, function(item) {
@@ -19793,7 +19792,7 @@ var render = function() {
           {
             key: item.url,
             staticClass:
-              "block md:inline no-underline text-grey-darkest text-sm font-semibold hover:text-grey-dark py-2 pl-8 pr-3",
+              "block py-2 pl-8 pr-3 text-sm font-semibold text-gray-900 no-underline md:inline hover:text-gray-600",
             attrs: { href: item.url }
           },
           [_vm._v(_vm._s(item.label))]

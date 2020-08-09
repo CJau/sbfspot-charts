@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container mx-auto px-6 md:px-0">
+  <div class="container px-6 mx-auto md:px-0">
     <div class="my-4">
-      <h2 class="md:inline-block align-middle">Monthly Generation - {{ $date->format('F, Y') }}</h2>
-      <div class="mt-3 md:mt-0 md:inline-block align-middle">
+      <h2 class="align-middle md:inline-block">Monthly Generation - {{ $date->format('F, Y') }}</h2>
+      <div class="mt-3 align-middle md:mt-0 md:inline-block">
         @if (!is_null($prev)) <a href="{{ url('month/'.$prev) }}" class="btn btn-outline-secondary">&laquo; Previous</a> @endif
         @if (!is_null($next)) <a href="{{ url('month/'.$next) }}" class="btn btn-outline-secondary">&raquo; Next</a> @endif
       </div>
     </div>
     @if ($data->isEmpty())
-      <p class="mt-5 bg-grey-lightest p-4 mb-4 shadow">No data exists for the chosen month, please use the navigation button(s) above to select a nearby month with data.</p>
+      <p class="p-4 mt-5 mb-4 bg-gray-200 shadow">No data exists for the chosen month, please use the navigation button(s) above to select a nearby month with data.</p>
     @else
-      <div id="chart" class="bg-grey-lightest p-4 mb-4 shadow"></div>
+      <div id="chart" class="p-4 mb-4 bg-gray-200 shadow"></div>
 
-      <collapsible-component :button-wrapper-class="'my-4'" :title="'Raw Data By Inverter'" :collapsible-wrapper-class="'bg-grey-lightest px-4 pt-4 mb-4 shadow'">
+      <collapsible-component :button-wrapper-class="'my-4'" :title="'Raw Data By Inverter'" :collapsible-wrapper-class="'bg-gray-200 space-4 p-4 mb-4 shadow'">
         @foreach ($data->groupBy('Serial') as $inverter => $pdata)
           <h4>Inverter Serial: {{ $inverter }}</h4>
           <table class="striped">

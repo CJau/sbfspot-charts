@@ -12,18 +12,18 @@
     <!-- Styles -->
     <link href="{{ url('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-grey-lighter h-screen antialiased">
+<body class="h-screen antialiased bg-gray-300">
     <div id="app">
-        <nav class="bg-grey-light mb-4 py-6">
+        <nav class="py-6 mb-4 bg-gray-400">
 
-            <div class="container mx-auto px-6 md:px-0">
+            <div class="container px-6 mx-auto md:px-0">
                 <div class="flex items-center justify-space">
-                    <div class="mr-6 items-start">
-                        <a href="{{ url('/') }}" class="text-xl font-semibold text-grey-darkest no-underline">
+                    <div class="items-start mr-6">
+                        <a href="{{ url('/') }}" class="text-xl font-semibold text-gray-900 no-underline">
                             {{ config('app.name', 'Laravel') }}
                         </a>
                     </div>
-                    <div class="flex-1 text-right items-center">
+                    <div class="items-center flex-1 text-right">
                         <responsive-nav-component :items="{{ json_encode([
                           ['url' => route('graphs.day'), 'label' => __('Daily') ],
                           ['url' => route('graphs.month'), 'label' => __('Monthly') ],

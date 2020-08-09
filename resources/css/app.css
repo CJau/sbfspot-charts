@@ -6,32 +6,32 @@
 
 /* Blue button and outline buttonstyle */
 .btn, .btn-outline:hover {
-  @apply px-3 py-2 rounded-lg border no-underline text-white bg-blue inline-block;
+  @apply inline-block px-3 py-2 text-white no-underline bg-blue-500 border rounded-lg;
 }
 
 .btn-outline, .btn:hover {
-  @apply px-3 py-2 rounded-lg border border-blue no-underline text-blue bg-white inline-block;
+  @apply inline-block px-3 py-2 text-blue-500 no-underline bg-white border border-blue-500 rounded-lg;
 }
 
 /* Striped full width table component */
 .striped {
-  @apply w-full my-4;
+  @apply w-full;
 }
 .striped tr:nth-child(odd) {
-  @apply bg-grey-lighter;
+  @apply bg-gray-300;
 }
 .striped tr:nth-child(even) {
-  @apply bg-grey-lightest;
+  @apply bg-gray-100;
 }
 .striped tr:hover {
-  @apply bg-blue-lightest;
+  @apply bg-blue-100;
 }
 .striped td, .striped th {
   @apply px-5 py-2;
 }
 .striped th {
-  @apply font-bold text-left bg-blue-lighter;
+  @apply font-bold text-left bg-blue-300;
 }
 .striped td {
-  @apply border-grey-light;
+  @apply border-gray-400;
 }
