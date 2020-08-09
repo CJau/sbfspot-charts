@@ -11,6 +11,8 @@
 |
 */
 
+Auth::routes(['register' => false]);
+
 Route::get('/', function () {
     return redirect(route('graphs.day'));
 });

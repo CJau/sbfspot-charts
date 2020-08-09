@@ -36,6 +36,14 @@
         </nav>
 
         @yield('content')
+        @guest
+            <a href="{{ route('login') }}">Login</a>
+        @else
+            <form action="{{ route('logout')  }}" method="POST" class="inline">
+                @csrf
+                <button class="p-0 m-0 border-0" type="submit">Logout</button>
+            </form>
+        @endguest
     </div>
 
     <!-- Scripts -->

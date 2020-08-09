@@ -39,12 +39,12 @@
                   @auth
                     <td>
                         <div class="flex items-center">
-                            <a href="{{ route('day_data_points.edit', [$d->Serial, $d->TimeStamp]) }}">E</a>
-                            <form method="POST" action="{{ route('day_data_points.delete', [$d->Serial, $d->TimeStamp]) }}" class="inline" onSubmit="return confirm('Are you sure?');">
+                            <a href="{{ route('day_data_points.edit', [$d->Serial, $d->TimeStamp->format('U')]) }}">E</a>
+                            <form method="POST" action="{{ route('day_data_points.destroy', [$d->Serial, $d->TimeStamp->format('U')]) }}" class="inline" onSubmit="return confirm('Are you sure?');">
                                 @csrf
                                 @method('DELETE')
                                 
-                                <a href="{{ route('day_data_points.edit', [$d->Serial, $d->TimeStamp]) }}" onClick="this.form.submit()">X</a>
+                                <a href="#" onClick="this.form.submit()">X</a>
                             </form>
                         </div>
                     </td>
