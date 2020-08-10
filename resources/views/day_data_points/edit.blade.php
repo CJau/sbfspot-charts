@@ -6,7 +6,7 @@
       <h2 class="align-middle md:inline-block">Updating point - {{ $dayDataPoint->TimeStamp->format('Y-m-d H:i:s') }}</h2>
     </div>
     
-    <form action="{{ route('day_data_points.update', [ $dayDataPoint->Serial, $dayDataPoint->TimeStamp->format('U') ])">
+    <form action="{{ route('day_data_points.update', [ $dayDataPoint->Serial, $dayDataPoint->TimeStamp->format('U') ]) }}" method="POST">
         @csrf
         @method('PATCH')
         <label for="TimeStamp">Timestamp</label>
