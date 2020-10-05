@@ -14,9 +14,9 @@ class DayDataPointTest extends TestCase
     /** @test */
     public function edit_works_ok()
     {
-        $point = factory(DayDataPoint::class)->create();
+        $point = DayDataPoint::factory()->create();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAs(User::factory()->create())
             ->get(route('day_data_points.edit', [
                 $point->Serial,
                 $point->TimeStamp->format('U'),
@@ -31,10 +31,10 @@ class DayDataPointTest extends TestCase
     /** @test */
     public function update_saves_and_redirects()
     {
-        $points = factory(DayDataPoint::class, 2)->create();
-        $data = factory(DayDataPoint::class)->make()->toArray();
+        $points = DayDataPoint::factory(2)->create();
+        $data = DayDataPoint::factory()->make()->toArray();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAs(User::factory()->create())
             ->patch(route('day_data_points.edit', [
                 $points->first()->Serial,
                 $points->first()->TimeStamp->format('U')
