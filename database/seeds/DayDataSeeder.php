@@ -1,4 +1,5 @@
 <?php
+namespace Database\Seeders;
 
 use App\DayDataPoint;
 use App\Inverter;
@@ -30,7 +31,8 @@ class DayDataSeeder extends Seeder
         DayDataPoint::insert($data);
     }
 
-    private function buildData($factor, &$data, $time, $serial) {
+    private function buildData($factor, &$data, $time, $serial)
+    {
         $power = (rand(7, 9) / 10) * (-0.2 * pow($factor, 2) + ($factor * 28.8));
 
         $data[] = [

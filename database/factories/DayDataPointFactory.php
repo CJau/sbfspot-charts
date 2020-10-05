@@ -1,17 +1,22 @@
 <?php
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\DayDataPoint;
 use App\Inverter;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\WithFaker;
 
-$factory->define(DayDataPoint::class, function (Faker $faker) {
-    return [
-        'TimeStamp' => $faker->time('U'),
-        'Serial' => factory(Inverter::class)->create()->Serial,
-        'TotalYield' => $faker->numberBetween(0, 90000000),
-        'Power' => $faker->numberBetween(0, 2000),
-        'PVOutput' => 0,
-    ];
-});
+class DayDataPointFactory extends Factory {
+    use WithFaker;
+
+    protected $model = DayDataPoint::class;
+
+    public function definition() {
+        return [
+            'TimeStamp' => $this->faker->time('U'),
+            'Serial' => factory(Inverter::class)->create()->Serial,
+            'TotalYield' => $this->faker->numberBetween(0, 90000000),
+            'Power' => $this->faker->numberBetween(0, 2000),
+            'PVOutput' => 0,
+        ];
+}
