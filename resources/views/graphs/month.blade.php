@@ -10,14 +10,14 @@
       </div>
     </div>
     @if ($data->isEmpty())
-      <p class="p-4 mt-5 mb-4 bg-gray-200 shadow">No data exists for the chosen month, please use the navigation button(s) above to select a nearby month with data.</p>
+      <p class="p-4 mt-5 mb-4 bg-gray-100 shadow">No data exists for the chosen month, please use the navigation button(s) above to select a nearby month with data.</p>
     @else
-      <div id="chart" class="p-4 mb-4 bg-gray-200 shadow"></div>
+      <div id="chart" class="p-4 mb-4 bg-gray-100 shadow"></div>
 
-      <collapsible-component :button-wrapper-class="'my-4'" :title="'Raw Data By Inverter'" :collapsible-wrapper-class="'bg-gray-200 space-4 p-4 mb-4 shadow'">
+      <collapsible-component :button-wrapper-class="'my-4'" :title="'Raw Data By Inverter'" :collapsible-wrapper-class="'bg-gray-100 space-4 p-4 mb-4 shadow'">
         @foreach ($data->groupBy('Serial') as $inverter => $pdata)
           <h4>Inverter Serial: {{ $inverter }}</h4>
-          <table class="striped">
+          <table class="mt-4 striped">
             <thead>
               <tr>
                 <th>Day</th>

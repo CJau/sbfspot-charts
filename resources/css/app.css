@@ -18,10 +18,10 @@
   @apply w-full;
 }
 .striped tr:nth-child(odd) {
-  @apply bg-gray-300;
+  @apply bg-gray-200;
 }
 .striped tr:nth-child(even) {
-  @apply bg-gray-100;
+  @apply bg-gray-50;
 }
 .striped tr:hover {
   @apply bg-blue-100;
