@@ -11,11 +11,9 @@ class SpotDataPoint extends Model
         'Serial',
     ];
 
-    protected $dates = [
-        'TimeStamp',
+    protected $casts = [
+        'TimeStamp' => 'datetime:U',
     ];
-    
-    protected $dateFormat = 'U';
 
     public $appends = [
         'time',

@@ -15,11 +15,9 @@ class DayDataPoint extends Model
         'time',
     ];
 
-    protected $dates = [
-        'TimeStamp',
+    protected $casts = [
+        'TimeStamp' => 'datetime:U',
     ];
-    
-    protected $dateFormat = 'U';
 
     public function inverter()
     {
