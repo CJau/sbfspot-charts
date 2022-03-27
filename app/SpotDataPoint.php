@@ -2,23 +2,19 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class SpotDataPoint extends Model
 {
     protected $table = 'SpotData';
-    // protected $primaryKey = [
-    //     'TimeStamp',
-    //     'Serial',
-    // ];
-    protected $primaryKey = null;
-    public $incrementing = false;
-
-    public $timestamps = false;
+    
+    protected $primaryKey = [
+        'TimeStamp',
+        'Serial',
+    ];
 
     protected $dates = [
         'TimeStamp',
     ];
+    
     protected $dateFormat = 'U';
 
     public $appends = [
@@ -35,13 +31,12 @@ class SpotDataPoint extends Model
         return $this->TimeStamp->format('H:i');
     }
 
-    public function update(array $attributes = [], array $options = []) {
-        // So we don't accidentally call eloquent update when eloquent doesn't 
-        // support composite primary keys
-    }
+    protected function setKeysForSaveQuery($query)
+    {
+        $query
+            ->where('TimeStamp', '=', $this->getRawOriginal('TimeStamp'))
+            ->where('Serial', '=', $this->getAttribute('Serial'));
 
-    public function save(array $options = []) {
-        // So we don't accidentally call eloquent update when eloquent doesn't 
-        // support composite primary keys
+        return $query;
     }
 }

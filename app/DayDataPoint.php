@@ -2,22 +2,14 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
 class DayDataPoint extends Model
 {
-    use HasFactory;
-
     protected $table = 'DayData';
-    // protected $primaryKey = [
-    //     'TimeStamp',
-    //     'Serial',
-    // ];
-    protected $primaryKey = null;
-    public $incrementing = false;
 
-    public $timestamps = false;
+    protected $primaryKey = [
+        'TimeStamp',
+        'Serial',
+    ];
 
     public $appends = [
         'time',
@@ -26,6 +18,7 @@ class DayDataPoint extends Model
     protected $dates = [
         'TimeStamp',
     ];
+    
     protected $dateFormat = 'U';
 
     public function inverter()
@@ -38,15 +31,12 @@ class DayDataPoint extends Model
         return $this->TimeStamp->format('H:i');
     }
 
-    public function update(array $attributes = [], array $options = [])
+    protected function setKeysForSaveQuery($query)
     {
-        // So we don't accidentally call eloquent update when eloquent doesn't
-        // support composite primary keys
-    }
+        $query
+            ->where('TimeStamp', '=', $this->getRawOriginal('TimeStamp'))
+            ->where('Serial', '=', $this->getAttribute('Serial'));
 
-    public function save(array $options = [])
-    {
-        // So we don't accidentally call eloquent update when eloquent doesn't
-        // support composite primary keys
+        return $query;
     }
 }
