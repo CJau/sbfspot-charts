@@ -16,15 +16,18 @@ class DayDataPointController extends Controller
 
     public function update($serial, $timestamp)
     {
-        with(DayDataPoint::where('Serial', $serial)->firstWhere('TimeStamp', $timestamp), function ($dayDataPoint) {
-            $dayDataPoint->update([
-                'TimeStamp' => Carbon::parse(request('TimeStamp', $dayDataPoint->TimeStamp))->format('U'),
-                'TotalYield' => request('TotalYield', $dayDataPoint->TotalYield),
-                'Power' => request('Power', $dayDataPoint->Power),
-            ]);
+        $dayDataPoint = DayDataPoint::firstWhere([
+            'Serial' => $serial,
+            'TimeStamp' => $timestamp
+        ]);
 
-            return redirect(route('graphs.day', $dayDataPoint->TimeStamp->toDateString()));
-        });
+        $dayDataPoint->update([
+            'TimeStamp' => Carbon::parse(request('TimeStamp', $dayDataPoint->TimeStamp))->format('U'),
+            'Power' => request('Power', $dayDataPoint->Power),
+            'TotalYield' => request('TotalYield', $dayDataPoint->TotalYield),
+        ]);
+
+        return redirect(route('graphs.day', $dayDataPoint->TimeStamp->toDateString()));
     }
 
     public function destroy($serial, $timestamp)

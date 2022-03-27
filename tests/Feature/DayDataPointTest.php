@@ -24,26 +24,38 @@ class DayDataPointTest extends TestCase
             ->assertOk()
             ->assertViewIs('day_data_points.edit')
             ->assertViewHas([
-                'dayDataPoint' => $point,
+                'dayDataPoint',
             ]);
     }
 
     /** @test */
     public function update_saves_and_redirects()
     {
-        $points = DayDataPoint::factory(2)->create();
-        $data = DayDataPoint::factory()->make()->toArray();
+        $update = DayDataPoint::factory()->create();
+        $retain = DayDataPoint::factory()->create();
 
         $this->actingAs(User::factory()->create())
             ->patch(route('day_data_points.edit', [
-                $points->first()->Serial,
-                $points->first()->TimeStamp->format('U')
-            ]), $data)
-            ->assertRedirect(route('graphs.day', $points->first()->TimeStamp->toDateString()))
-            ->assertViewIs('graphs.day');
+                $update->Serial,
+                $update->TimeStamp->format('U')
+            ]), [
+                'Power' => 500,
+                'TotalYield' => 1500,
+            ])
+            ->assertRedirect(route('graphs.day', $update->TimeStamp->toDateString()));
 
-        $this->assertTrue(DayDataPoint::where($data)->exists());
-        $this->assertTrue(DayDataPoint::where($points->first()->toArray())->doesntExist());
-        $this->assertTrue(DayDataPoint::where($points->last()->toArray())->exists());
+        $this->assertTrue(DayDataPoint::where([
+            'Serial' => $update->Serial,
+            'TimeStamp' => $update->getRawOriginal('TimeStamp'),
+            'Power' => 500,
+            'TotalYield' => 1500,
+        ])->exists());
+
+        $this->assertTrue(DayDataPoint::where([
+            'Serial' => $retain->Serial,
+            'TimeStamp' => $retain->getRawOriginal('TimeStamp'),
+            'Power' => $retain->Power,
+            'TotalYield' => $retain->TotalYield,
+        ])->exists());
     }
 }
