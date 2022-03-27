@@ -58,4 +58,25 @@ class DayDataPointTest extends TestCase
             'TotalYield' => $retain->TotalYield,
         ])->exists());
     }
+
+    /** @test */
+    public function destroy_deletes_and_redirects()
+    {
+        $delete = DayDataPoint::factory()->create();
+        $retain = DayDataPoint::factory()->create();
+
+        $this->actingAs(User::factory()->create())
+            ->delete(route('day_data_points.destroy', [$delete->Serial, $delete->TimeStamp->format('U')]))
+            ->assertRedirect(route('graphs.day'));
+
+        $this->assertTrue(DayDataPoint::where([
+            'Serial' => $delete->Serial,
+            'TimeStamp' => $delete->getRawOriginal('TimeStamp'),
+        ])->doesntExist());
+
+        $this->assertTrue(DayDataPoint::where([
+            'Serial' => $retain->Serial,
+            'TimeStamp' => $retain->getRawOriginal('TimeStamp'),
+        ])->exists());
+    }
 }

@@ -32,8 +32,11 @@ class DayDataPointController extends Controller
 
     public function destroy($serial, $timestamp)
     {
-        DayDataPoint::where('Serial', $serial)->where('TimeStamp', $timestamp)->delete();
+        DayDataPoint::where([
+            'Serial' => $serial,
+            'TimeStamp' => $timestamp,
+        ])->delete();
 
-        return redirect(route('graphs.day', date('Y-m-d', $timestamp)));
+        return redirect(route('graphs.day'));
     }
 }

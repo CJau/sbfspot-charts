@@ -44,7 +44,7 @@
                                 @csrf
                                 @method('DELETE')
                                 
-                                <a href="#" onClick="this.form.submit()">X</a>
+                                <button class="inline">X</a>
                             </form>
                         </div>
                     </td>
